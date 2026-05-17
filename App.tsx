@@ -13,6 +13,11 @@ import {
 import { Square } from './src/codes/Square';
 import { FlexBoxExamples } from './src/codes/FlexBoxExamples';
 import { Alignments } from './src/codes/Alignments';
+import ColorsAndDimentions from './src/codes/ColorsAndDimentions';
+import TextViewAndButtons from './src/uicomponents/TextViewAndButtons';
+import TextInputExample from './src/uicomponents/TextInputExample';
+import ImageExample from './src/uicomponents/ImageExample';
+import Hooks from './src/uicomponents/Hooks';
 
 function App() {
 
@@ -25,7 +30,12 @@ function App() {
   return (
     <SafeAreaProvider>
       {/* <FlexBoxExamples /> */}
-      <Alignments />
+      {/* <Alignments /> */}
+      {/* <ColorsAndDimentions /> */}
+      {/* <TextViewAndButtons /> */}
+      {/* <TextInputExample /> */}
+      {/* <ImageExample /> */}
+      <Hooks />
     </SafeAreaProvider>
   );
 }

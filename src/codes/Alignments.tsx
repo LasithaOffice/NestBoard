@@ -4,22 +4,25 @@ export const Alignments = () => {
   return (
     <View style={
       {
-        backgroundColor: 'yellow',
-        flex: 0.5,
-        flexDirection: 'row'
+        flex: 1,
+        padding: 50
       }
     }>
       <View style={{
-        width: 100, height: 100, backgroundColor: 'red',
-        marginRight: 30
-      }}></View>
-      <View style={{
-        width: 100, height: 100, backgroundColor: 'blue',
-      }}></View>
-      <View style={{
-        width: 100, height: 100, backgroundColor: 'green',
-        marginLeft: 30
-      }}></View>
+        width: 200, height: 200, backgroundColor: 'blue',
+        borderLeftWidth: 20,
+        borderTopWidth: 20,
+        borderRightWidth: 20,
+        borderBottomWidth: 20,
+        borderLeftColor: 'red',
+        borderTopColor: 'red',
+        borderRightColor: 'green',
+        borderBottomColor: 'green',
+        borderStyle: 'solid', //dashed , dotted,
+        borderTopLeftRadius: '50%',
+        borderBottomRightRadius: '50%'
+      }}>
+      </View>
     </View>
   )
 }
