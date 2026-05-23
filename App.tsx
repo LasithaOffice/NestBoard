@@ -8,6 +8,7 @@
 import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 import {
   SafeAreaProvider,
+  SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import { Square } from './src/codes/Square';
@@ -18,6 +19,11 @@ import TextViewAndButtons from './src/uicomponents/TextViewAndButtons';
 import TextInputExample from './src/uicomponents/TextInputExample';
 import ImageExample from './src/uicomponents/ImageExample';
 import Hooks from './src/uicomponents/Hooks';
+import Componentdestroying from './src/uicomponents/Componentdestroying';
+import FlatListExample from './src/uicomponents/FlatListExample';
+import ShoppingCart from './src/uicomponents/ShoppingCart';
+import HorizontalList from './src/uicomponents/HorizontalExample';
+import ListPerformance from './src/uicomponents/ListPerformance';
 
 function App() {
 
@@ -35,7 +41,13 @@ function App() {
       {/* <TextViewAndButtons /> */}
       {/* <TextInputExample /> */}
       {/* <ImageExample /> */}
-      <Hooks />
+      {/* <Componentdestroying /> */}
+      <SafeAreaView>
+        {/* <ShoppingCart /> */}
+        <FlatListExample />
+        {/* <ListPerformance /> */}
+        {/* <HorizontalList /> */}
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }

@@ -12,7 +12,7 @@ const Hooks = () => {
 
   useEffect(() => {
     console.log("Hello " + x);
-  }, [x, y]) //If any member of this list 
+  }, [x]) //If any member of this list 
   // were the reason to the re render of this component
   // This use effect will be executed
 

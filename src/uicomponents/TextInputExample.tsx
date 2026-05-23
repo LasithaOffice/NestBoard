@@ -1,5 +1,5 @@
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 const TextInputExample = () => {
 
@@ -7,16 +7,16 @@ const TextInputExample = () => {
   const [num1, setNum1] = useState<string>("123")
   const [num2, setNum2] = useState<string>("456")
 
-  const displayMessage = () => {
+  const displayMessage = useCallback(() => {
     Alert.alert("Welcome " + name);
-  }
+  }, [name])
 
-  const clearMessage = () => { // "12" -> 12
+  const clearMessage = useCallback(() => { // "12" -> 12
     // "1.25" --> 1.25
     setName("")
     // Alert.alert("", (parseInt(num1) + parseInt(num2)) + "") //to convert to int
     // Alert.alert("", (parseFloat(num1) + parseFloat(num2)) + "") //to convert to floating points
-  }
+  }, [])
 
   return (
     <View>
