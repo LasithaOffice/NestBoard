@@ -15,15 +15,18 @@ import { Square } from './src/codes/Square';
 import { FlexBoxExamples } from './src/codes/FlexBoxExamples';
 import { Alignments } from './src/codes/Alignments';
 import ColorsAndDimentions from './src/codes/ColorsAndDimentions';
-import TextViewAndButtons from './src/uicomponents/TextViewAndButtons';
-import TextInputExample from './src/uicomponents/TextInputExample';
-import ImageExample from './src/uicomponents/ImageExample';
-import Hooks from './src/uicomponents/Hooks';
-import Componentdestroying from './src/uicomponents/Componentdestroying';
-import FlatListExample from './src/uicomponents/FlatListExample';
-import ShoppingCart from './src/uicomponents/ShoppingCart';
-import HorizontalList from './src/uicomponents/HorizontalExample';
-import ListPerformance from './src/uicomponents/ListPerformance';
+import TextViewAndButtons from './src/codes/uicomponents/TextViewAndButtons';
+import TextInputExample from './src/codes/uicomponents/TextInputExample';
+import ImageExample from './src/codes/uicomponents/ImageExample';
+import Hooks from './src/codes/uicomponents/Hooks';
+import Componentdestroying from './src/codes/uicomponents/Componentdestroying';
+import FlatListExample from './src/codes/uicomponents/FlatListExample';
+import ShoppingCart from './src/codes/uicomponents/ShoppingCart';
+import HorizontalList from './src/codes/uicomponents/HorizontalExample';
+import ListPerformance from './src/codes/uicomponents/ListPerformance';
+import { NavigationContainer } from '@react-navigation/native';
+import MainStack from './src/navigations/MainStack';
+import MainNavigation from './src/navigations/MainNavigation';
 
 function App() {
 
@@ -42,12 +45,19 @@ function App() {
       {/* <TextInputExample /> */}
       {/* <ImageExample /> */}
       {/* <Componentdestroying /> */}
-      <SafeAreaView>
+      <View style={{ flex: 1 }}>
         {/* <ShoppingCart /> */}
-        <FlatListExample />
+        {/* <FlatListExample /> */}
         {/* <ListPerformance /> */}
         {/* <HorizontalList /> */}
-      </SafeAreaView>
+
+        {/* Mounting Navigation system */}
+        <NavigationContainer>
+          {/* <MainStack />   */}
+          {/* <-- Navigation system */}
+          <MainNavigation />
+        </NavigationContainer>
+      </View>
     </SafeAreaProvider>
   );
 }
