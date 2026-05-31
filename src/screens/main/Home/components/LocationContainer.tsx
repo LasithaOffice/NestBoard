@@ -3,6 +3,7 @@ import React from 'react'
 import { Colors } from '../../../../constant/colors'
 
 const LocationContainer = () => {
+
   return (
     <View style={styles.container}>
       {/* Avatar Image */}
