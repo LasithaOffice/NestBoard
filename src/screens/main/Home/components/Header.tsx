@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import { Bell } from 'lucide-react-native'
 import { Colors } from '../../../../constant/colors'
+import RoundButton from '../../../../components/ui/RoundButton'
 
 const Header = () => {
   return (
@@ -16,28 +17,10 @@ const Header = () => {
           }
         }>Board</Text>
       </Text>
-      <TouchableOpacity style={
-        {
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: 48,
-          height: 48,
-          borderRadius: 100,
-          backgroundColor: 'white',
-          elevation: 5,
-        }
-      }>
-        <View style={{
-          width: 8,
-          height: 8,
-          borderRadius: 10,
-          backgroundColor: Colors.PRIMARY_COLOR,
-          position: 'absolute',
-          top: 8,
-          right: 8
-        }}></View>
-        <Bell color={Colors.SECONDARY_COLOR} size={20} />
-      </TouchableOpacity>
+      <RoundButton
+        Icon={<Bell color={Colors.SECONDARY_COLOR} size={20} />}
+        orangeIndicator
+      />
     </View>
   )
 }

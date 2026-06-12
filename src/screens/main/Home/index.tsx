@@ -1,34 +1,41 @@
-import { View, Text, FlatList, Image } from 'react-native'
-import React from 'react'
+import { View, Text } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { styles } from './styles'
 import LocationContainer from './components/LocationContainer'
-import { useGetProperties } from '../../../controllers/properties'
+import SearchContainer from './components/SearchContainer'
+import PropertyTypesList from './components/PropertyTypesList'
+import { PropertyType } from '../../../types/common'
+import { Colors } from '../../../constant/colors'
+import PropertyList from './components/PropertyList'
+
+
 
 const Home = () => {
 
-  const { properties } = useGetProperties();
-
-  console.log("data ", properties)
+  const [currentPType, setCurrentPType] = useState<PropertyType>('All');
 
   return (
     <View style={styles.homeContainer}>
       <LocationContainer />
-      <FlatList
-        style={{ flex: 1, backgroundColor: 'red' }}
-        data={properties}
-        renderItem={(d) =>
-          <View style={{ width: 200, height: 260, backgroundColor: "blue", margin: 10 }}>
-            <Image
-              source={{ uri: d.item.image }}
-              style={{ width: 200, height: 200 }}
-              resizeMode="cover"
-            />
-
-            <Text style={{ color: "white" }}>{d.item.title}</Text>
-          </View>
+      <SearchContainer />
+      <PropertyTypesList currentPType={currentPType} setCurrentPType={setCurrentPType} />
+      <View style={
+        {
+          flexDirection: 'row',
+          justifyContent: 'space-between'
         }
-        keyExtractor={(data) => data.id}
-      />
+      }>
+        <Text style={{
+          fontSize: 24,
+          fontWeight: '700'
+        }}>Popular</Text>
+        <Text style={{
+          fontSize: 16,
+          fontWeight: '500',
+          color: Colors.TEXT_GRAY
+        }}>See all</Text>
+      </View>
+      <PropertyList />
     </View>
   )
 }
