@@ -4,4 +4,6 @@ export const Colors = {
   AVATAR_BACKGROUND: '#C9A87C',
   TEXT_GRAY: '#8A8A9A',
   ICON_GRAY: '#8A8A9A',
+  BORDER_GRAY: '#cacaca',
+  WHITE: '#ffffff',
 }

@@ -27,6 +27,9 @@ import ListPerformance from './src/codes/uicomponents/ListPerformance';
 import { NavigationContainer } from '@react-navigation/native';
 import MainStack from './src/navigations/MainStack';
 import MainNavigation from './src/navigations/MainNavigation';
+import { Provider } from 'react-redux';
+import { store } from './src/types/store';
+import RootNav from './src/navigations/RootNav';
 
 function App() {
 
@@ -37,28 +40,30 @@ function App() {
 
 
   return (
-    <SafeAreaProvider>
-      {/* <FlexBoxExamples /> */}
-      {/* <Alignments /> */}
-      {/* <ColorsAndDimentions /> */}
-      {/* <TextViewAndButtons /> */}
-      {/* <TextInputExample /> */}
-      {/* <ImageExample /> */}
-      {/* <Componentdestroying /> */}
-      <View style={{ flex: 1 }}>
-        {/* <ShoppingCart /> */}
-        {/* <FlatListExample /> */}
-        {/* <ListPerformance /> */}
-        {/* <HorizontalList /> */}
+    <Provider store={store}>
+      <SafeAreaProvider>
+        {/* <FlexBoxExamples /> */}
+        {/* <Alignments /> */}
+        {/* <ColorsAndDimentions /> */}
+        {/* <TextViewAndButtons /> */}
+        {/* <TextInputExample /> */}
+        {/* <ImageExample /> */}
+        {/* <Componentdestroying /> */}
+        <View style={{ flex: 1 }}>
+          {/* <ShoppingCart /> */}
+          {/* <FlatListExample /> */}
+          {/* <ListPerformance /> */}
+          {/* <HorizontalList /> */}
 
-        {/* Mounting Navigation system */}
-        <NavigationContainer>
-          {/* <MainStack />   */}
-          {/* <-- Navigation system */}
-          <MainNavigation />
-        </NavigationContainer>
-      </View>
-    </SafeAreaProvider>
+          {/* Mounting Navigation system */}
+          <NavigationContainer>
+            {/* <MainStack />   */}
+            {/* <-- Navigation system */}
+            <RootNav />
+          </NavigationContainer>
+        </View>
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 

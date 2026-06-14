@@ -1,10 +1,17 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native'
 import React from 'react'
 import { Bell } from 'lucide-react-native'
 import { Colors } from '../../../../constant/colors'
 import RoundButton from '../../../../components/ui/RoundButton'
+import { store } from '../../../../types/store'
+import { logout } from '../../../../types/authSlice'
+import { clearAuth } from '../../../../types/authStorage'
+import { useNavigation } from '@react-navigation/native'
 
 const Header = () => {
+
+  const nav: any = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.nest}>
@@ -21,6 +28,11 @@ const Header = () => {
         Icon={<Bell color={Colors.SECONDARY_COLOR} size={20} />}
         orangeIndicator
       />
+      <Button title='Logout' onPress={async () => {
+        nav.navigate("Login")
+        store.dispatch(logout());
+        await clearAuth();
+      }} />
     </View>
   )
 }

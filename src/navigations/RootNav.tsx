@@ -12,27 +12,29 @@ import { useAppSelector } from '../types/hooks'
 import AuthStack from './AuthStack'
 import MainStack from './MainStack'
 import { restoreAuth } from '../types/authStorage'
+import MainNavigation from './MainNavigation'
 
 const Stack = createNativeStackNavigator()
 
-const MainNavigation = () => {
+const RootNav = () => {
 
-  const status = useAppSelector((s) => s.auth.status);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    restoreAuth().finally(() => setIsReady(true));
+  }, []);
 
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
     >
-      {
-        status === 'authenticated' ? (
-          <Stack.Screen name="AppStack" component={MainStack} />
-        ) : (
-          <Stack.Screen name="AuthStack" component={AuthStack} />
-        )
+      {!isReady ? (
+        <Stack.Screen name="Splash" component={ScreenA} />
+      ) :
+        <Stack.Screen name="AppStack" component={MainNavigation} />
       }
-      <Stack.Screen name='Home' component={MainStack} />
     </Stack.Navigator>
   )
 }
 
-export default MainNavigation
+export default RootNav
