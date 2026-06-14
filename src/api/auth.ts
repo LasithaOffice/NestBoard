@@ -9,6 +9,11 @@ export const AuthAPI = {
   },
 
   register: async (payload: RegisterPayload) => {
+    //     {
+    //   email: "abc@gmail.com";
+    //   password: "123123123";
+    //   displayName?: "Max";
+    // }
     const d = await apiClient.post<AuthResponse>('auth/register', payload);
     return d.data;
   },

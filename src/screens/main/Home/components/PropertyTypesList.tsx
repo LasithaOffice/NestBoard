@@ -49,6 +49,7 @@ const PropertyTypesList = ({ currentPType, setCurrentPType }: Props) => {
         {
           Menu.map(i =>
             <SwitchButton
+              key={i.title}
               selected={currentPType == i.title}
               text={i.title}
               Icon={(currentPType == i.title) ? i.WhiteIcon : i.GrayIcon}

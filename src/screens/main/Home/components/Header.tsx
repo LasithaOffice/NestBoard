@@ -3,14 +3,15 @@ import React from 'react'
 import { Bell } from 'lucide-react-native'
 import { Colors } from '../../../../constant/colors'
 import RoundButton from '../../../../components/ui/RoundButton'
-import { store } from '../../../../types/store'
-import { logout } from '../../../../types/authSlice'
-import { clearAuth } from '../../../../types/authStorage'
 import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../../store/authSlice'
+import { removeRefreshToken } from '../../../../util/localStorage'
 
 const Header = () => {
 
   const nav: any = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
@@ -27,12 +28,11 @@ const Header = () => {
       <RoundButton
         Icon={<Bell color={Colors.SECONDARY_COLOR} size={20} />}
         orangeIndicator
+        onPress={() => {
+          dispatch(logout())
+          removeRefreshToken();
+        }}
       />
-      <Button title='Logout' onPress={async () => {
-        nav.navigate("Login")
-        store.dispatch(logout());
-        await clearAuth();
-      }} />
     </View>
   )
 }

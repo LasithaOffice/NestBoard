@@ -6,6 +6,7 @@ import { Colors } from '../../constant/colors';
 type Props = {
   children: ReactNode,
   heightPrecentage?: DimensionValue | undefined
+
 }
 
 const AuthUIWrapper = ({
@@ -18,6 +19,7 @@ const AuthUIWrapper = ({
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <View style={styles.imageContainer} >
+        {/* Top content */}
         <View style={[styles.imageAbsoluteContainer, {
           height: heightPrecentage
         }]}>
@@ -44,6 +46,7 @@ const AuthUIWrapper = ({
             </View>
           </LinearGradient>
         </View>
+        {/* Form content */}
         {children}
       </View>
     </KeyboardAvoidingView>
@@ -63,7 +66,6 @@ const styles = StyleSheet.create({
   topImage: { width: '100%', height: '100%' },
   gradientContainer: {
     position: 'absolute',
-    // backgroundColor: '#ffffffb2',
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',

@@ -1,7 +1,8 @@
 import axios from "axios";
-import { store } from "../types/store";
-import { logout, setTokens } from "../types/authSlice";
 import { createAsyncStorage } from "@react-native-async-storage/async-storage";
+import { store } from "../store/store";
+import { logout, saveToken } from "../store/authSlice";
+import { persistLogin, removeRefreshToken } from "../util/localStorage";
 const storage = createAsyncStorage("appDB");
 
 export const apiClient = axios.create({
@@ -31,7 +32,7 @@ apiClient.interceptors.response.use(
       original._retry = true;
       const { refreshToken } = store.getState().auth;
       if (!refreshToken) {
-
+        store.dispatch(logout())
         return Promise.reject(error);
       }
       try {
@@ -39,16 +40,21 @@ apiClient.interceptors.response.use(
           `${apiClient.defaults.baseURL}auth/refresh`,
           { refreshToken }
         );
-        store.dispatch(setTokens(data));
-        await storage.setItem('refreshToken', data.refreshToken);
+        store.dispatch(saveToken({
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+        }));
+        persistLogin(data.refreshToken);
         original.headers.Authorization = `Bearer ${data.accessToken}`;
         return apiClient(original);
       } catch (refreshErr) {
         store.dispatch(logout());
-        await storage.removeMany(['refreshToken', 'user']);
+        removeRefreshToken();
         return Promise.reject(refreshErr);
       }
     }
     return Promise.reject(error);
   }
 );
+
+
