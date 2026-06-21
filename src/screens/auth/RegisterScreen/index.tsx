@@ -7,12 +7,12 @@ import {
 } from "react-native";
 import { Mail, User } from "lucide-react-native";
 import { AuthAPI } from "../../../api/auth";
-import FormComponentWrapper from "../../../components/wrappers_____/FormComponentWrapper";
+import FormComponentWrapper from "../../../components/wrappers/FormComponentWrapper";
 import IconInput from "../../../components/ui/IconInput";
 import PasswordField from "../../../components/ui/PasswordField";
 import RegularButton from "../../../components/ui/RegularButton";
 import { Colors } from "../../../constant/colors";
-import AuthUIWrapper from "../../../components/wrappers_____/AuthUIWrapper";
+import AuthUIWrapper from "../../../components/wrappers/AuthUIWrapper";
 import { useDispatch } from "react-redux";
 import { saveToken } from "../../../store/authSlice";
 import { persistLogin } from "../../../util/localStorage";

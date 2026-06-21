@@ -1,10 +1,7 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import ScreenA from '../screens/ScreenA'
-import ScreenB from '../screens/ScreenB'
-import ScreenC from '../screens/ScreenC'
 import Home from '../screens/main/Home'
+import PropertyDetails from '../screens/main/PropertyDetails'
 import Header from '../screens/main/Home/components/Header'
 
 const Stack = createNativeStackNavigator()
@@ -12,12 +9,18 @@ const Stack = createNativeStackNavigator()
 const AppStack = () => {
   return (
     <Stack.Navigator screenOptions={
-      {
-        header: Header
-      }
-    }
-    >
-      <Stack.Screen name='Home' component={Home} />
+      { headerShown: false }
+    } >
+      <Stack.Screen name='Home' options={
+        {
+          header: Header,
+          headerShown: true
+        }
+      } component={Home} />
+      <Stack.Screen name='PropertyDetails' component={PropertyDetails} options={{
+        headerShown: false,
+        headerTransparent: true
+      }} />
     </Stack.Navigator>
   )
 }
