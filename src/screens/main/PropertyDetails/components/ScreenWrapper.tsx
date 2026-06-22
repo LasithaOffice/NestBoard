@@ -5,6 +5,9 @@ import LinearGradient from 'react-native-linear-gradient'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import PropertyHeader from './Header'
 import { Star } from 'lucide-react-native'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../../store/store'
+import Skeleton from '../../../../components/ui/Skeleton'
 
 type Props = {
   children: ReactNode,
@@ -15,33 +18,40 @@ const ScreenWrapper = ({
 }: Props) => {
 
   const insets = useSafeAreaInsets();
-
+  const currentProperty = useSelector((state: RootState) => state.property.currentProperty)
 
   return (
     <KeyboardAvoidingView
-
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView
-      >
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[styles.imageContainer, {
           paddingBottom: insets.bottom
         }]} >
           {/* Top content */}
-          <View style={styles.imageAbsoluteContainer}>
-            <Image resizeMode="cover" style={styles.topImage} source={
-              require('../../../../assets/images/detail_top.png')
-            } />
-
-          </View>
+          {
+            currentProperty ?
+              <View style={styles.imageAbsoluteContainer}>
+                <Image resizeMode="cover" style={styles.topImage} source={
+                  {
+                    uri: currentProperty.imageUrl
+                  }
+                } />
+              </View>
+              :
+              <Skeleton style={styles.imageAbsoluteContainer} />
+          }
           {/* Form content */}
           {children}
         </View>
+        {/* Rating component */}
         <View style={styles.ratingContainer}>
           <Star color={Colors.PRIMARY_COLOR} />
-          <Text style={styles.ratingText}>{2}</Text>
+          <Text style={styles.ratingText}>{currentProperty?.rating}</Text>
         </View>
+
+        {/* Header */}
         <PropertyHeader />
       </ScrollView>
     </KeyboardAvoidingView>

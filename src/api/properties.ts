@@ -1,4 +1,4 @@
-import { PropertyItem } from "../types/properties";
+import { Property, PropertyItem } from "../types/properties";
 import { apiClient } from "./apiClient"
 
 export const PropertyAPI = {
@@ -8,7 +8,7 @@ export const PropertyAPI = {
   },
 
   getSingleProperty: async (id: string) => {
-    const d = await apiClient.get<PropertyItem[]>('properties/' + id)
+    const d = await apiClient.get<Property>('properties/' + id)
     return d.data;
   },
 }

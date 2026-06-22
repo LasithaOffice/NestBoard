@@ -7,10 +7,11 @@ const ACCENT = '#FF6A39';
 export interface RoomType {
   id: string;
   name: string;
-  tag: string; // "AC" | "Non-AC"
-  pricePerSeat: number;
-  seatsFree: number;
-  fillPercentage: number;
+  propertyId: string;
+  pricePerMonth: string;
+  seatCapacity: number;
+  hasAC: boolean;
+  createdAt: string;
 }
 
 interface RoomCardProps {
@@ -19,26 +20,29 @@ interface RoomCardProps {
 }
 
 const RoomCard = ({ room, onViewRooms }: RoomCardProps) => {
+
+  const fillPercentage = '60';
+
   return (
     <View style={styles.card}>
       <View style={styles.header}>
         <Typography variant="h3">{room.name}</Typography>
         <View style={styles.tag}>
-          <Typography variant="badge">{room.tag}</Typography>
+          <Typography variant="badge">{(room.hasAC) ? "AC" : "None AC"}</Typography>
         </View>
       </View>
 
       <Typography variant="subtitle">
-        LKR {room.pricePerSeat.toLocaleString()} / seat / month
+        LKR {room.pricePerMonth} / seat / month
       </Typography>
 
       <View style={styles.progressRow}>
-        <Typography variant="caption">{room.seatsFree} seats free</Typography>
-        <Typography variant="caption">{room.fillPercentage}% filled</Typography>
+        <Typography variant="caption">{room.seatCapacity} seats free</Typography>
+        <Typography variant="caption">{fillPercentage}% filled</Typography>
       </View>
 
       <View style={styles.track}>
-        <View style={[styles.fill, { width: `${room.fillPercentage}%` }]} />
+        <View style={[styles.fill, { width: `${fillPercentage}%` }]} />
       </View>
 
       <TouchableOpacity style={styles.button} onPress={() => onViewRooms(room.id)}>

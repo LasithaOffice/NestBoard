@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TextProps, TextStyle } from 'react-native';
+import { Colors } from '../../constant/colors';
 
 export type TypographyWeight = 'regular' | 'medium' | 'semibold' | 'bold' | 'extrabold';
 
@@ -23,15 +24,15 @@ const FONT_WEIGHTS: Record<TypographyWeight, TextStyle['fontWeight']> = {
 };
 
 const VARIANT_STYLES: Record<TypographyVariant, TextStyle> = {
-  h1: { fontSize: 26, fontWeight: FONT_WEIGHTS.bold, color: '#1A1A1A' },
-  h2: { fontSize: 20, fontWeight: FONT_WEIGHTS.bold, color: '#1A1A1A' },
-  h3: { fontSize: 16, fontWeight: FONT_WEIGHTS.semibold, color: '#1A1A1A' },
-  subtitle: { fontSize: 14, fontWeight: FONT_WEIGHTS.medium, color: '#6B7280' },
-  body: { fontSize: 14, fontWeight: FONT_WEIGHTS.regular, color: '#1A1A1A' },
-  caption: { fontSize: 12, fontWeight: FONT_WEIGHTS.regular, color: '#9CA3AF' },
-  button: { fontSize: 15, fontWeight: FONT_WEIGHTS.bold, color: '#FFFFFF' },
-  stat: { fontSize: 20, fontWeight: FONT_WEIGHTS.extrabold, color: '#1A1A1A' },
-  badge: { fontSize: 12, fontWeight: FONT_WEIGHTS.semibold, color: '#FF6A39' },
+  h1: { fontSize: 26, fontWeight: FONT_WEIGHTS.bold, color: Colors.TEXT_PRIMARY },
+  h2: { fontSize: 20, fontWeight: FONT_WEIGHTS.bold, color: Colors.TEXT_PRIMARY },
+  h3: { fontSize: 16, fontWeight: FONT_WEIGHTS.semibold, color: Colors.TEXT_PRIMARY },
+  subtitle: { fontSize: 14, fontWeight: FONT_WEIGHTS.medium, color: Colors.TEXT_PRIMARY },
+  body: { fontSize: 14, fontWeight: FONT_WEIGHTS.regular, color: Colors.TEXT_PRIMARY },
+  caption: { fontSize: 12, fontWeight: FONT_WEIGHTS.regular, color: Colors.TEXT_GRAY },
+  button: { fontSize: 15, fontWeight: FONT_WEIGHTS.bold, color: Colors.WHITE },
+  stat: { fontSize: 20, fontWeight: FONT_WEIGHTS.extrabold, color: Colors.TEXT_PRIMARY },
+  badge: { fontSize: 12, fontWeight: FONT_WEIGHTS.semibold, color: Colors.PRIMARY_COLOR },
 };
 
 export interface TypographyProps extends TextProps {

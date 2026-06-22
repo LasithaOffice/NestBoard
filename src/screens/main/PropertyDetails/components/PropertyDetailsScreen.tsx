@@ -10,7 +10,7 @@ const BORDER = '#E5E7EB';
 
 interface PropertyStats {
   seatsAvailable: number;
-  minStayMonths: number;
+  minStayMonths: string;
   priceFrom: string; // e.g. "LKR 15K"
 }
 
@@ -18,7 +18,6 @@ interface PropertyDetailsScreenProps {
   title: string;
   address: string;
   badges: string[];     // e.g. ['Apartment', 'AC', 'Premium'] — first one is highlighted
-  amenities: string[];  // e.g. ['WiFi']
   stats: PropertyStats;
   rooms: RoomType[];
   onViewRooms: (roomId: string) => void;
@@ -45,7 +44,6 @@ const PropertyDetailsScreen = ({
   title,
   address,
   badges,
-  amenities,
   stats,
   rooms,
   onViewRooms,
@@ -62,12 +60,6 @@ const PropertyDetailsScreen = ({
       <View style={styles.chipRow}>
         {badges.map((badge, index) => (
           <Chip key={badge} label={badge} active={index === 0} />
-        ))}
-      </View>
-
-      <View style={styles.chipRow}>
-        {amenities.map((item) => (
-          <Chip key={item} label={item} />
         ))}
       </View>
 

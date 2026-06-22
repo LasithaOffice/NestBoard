@@ -4,7 +4,7 @@ import React from 'react'
 const PropertyMap = () => {
   return (
     <View>
-      <Text>Search</Text>
+      <Text>Property Map</Text>
     </View>
   )
 }
