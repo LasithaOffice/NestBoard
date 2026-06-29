@@ -35,7 +35,7 @@ const ScreenWrapper = ({
               <View style={styles.imageAbsoluteContainer}>
                 <Image resizeMode="cover" style={styles.topImage} source={
                   {
-                    uri: currentProperty.imageUrl
+                    uri: currentProperty.image
                   }
                 } />
               </View>

@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import { Platform, Pressable, StyleSheet, View } from "react-native";
 import { SCREEN_WIDTH } from "../../constant/dimentions";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Colors } from "../../constant/colors";
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     elevation: 2,
     position: 'absolute',
-    bottom: 0,
+    bottom: (Platform.OS == 'android') ? 0 : -20,
     padding: 16,
     width: SCREEN_WIDTH - 40,
     alignItems: 'center',

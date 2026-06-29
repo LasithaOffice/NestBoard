@@ -3,10 +3,14 @@ import { createAsyncStorage } from "@react-native-async-storage/async-storage";
 import { store } from "../store/store";
 import { logout, saveToken } from "../store/authSlice";
 import { persistLogin, removeRefreshToken } from "../util/localStorage";
+import { Platform } from "react-native";
 const storage = createAsyncStorage("appDB");
 
+const ANDROID_IP = "10.0.2.2"
+const IOS_IP = "127.0.0.1"
+
 export const apiClient = axios.create({
-  baseURL: "http://10.0.2.2:3001/api/",
+  baseURL: `http://${(Platform.OS == 'android') ? ANDROID_IP : IOS_IP}:3001/api/`, //127.0.0.1
   //"http://172.20.10.5:3001/api/" + "properties"
   headers: {
     'Content-Type': 'application/json',

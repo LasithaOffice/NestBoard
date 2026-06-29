@@ -59,7 +59,6 @@ export default function SignupScreen() {
 
       //Save the refresh token inside the device storage
       persistLogin(data.refreshToken)
-      nav.navigate("Home")
     } catch (err: any) {
       console.log("err.response", err.response)
       if (err.response?.status === 401) {

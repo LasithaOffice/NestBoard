@@ -1,5 +1,17 @@
 import { PropertyType } from "./common";
 
+export type PropertyListResponse = {
+  data: PropertyItem[],
+  meta: {
+    page: number,
+    limit: number,
+    total: number,
+    totalPages: number,
+    hasNextPage: boolean,
+    hasPreviousPage: boolean
+  }
+}
+
 export type PropertyItem = {
   id: string;
   title: string;
@@ -34,7 +46,7 @@ export interface Property {
   amenities: string[];
   latitude: number;
   longitude: number;
-  imageUrl: string;
+  image: string;
   minStay: string;
   isActive: boolean;
   createdAt: string;

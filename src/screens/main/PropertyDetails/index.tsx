@@ -14,7 +14,6 @@ const PropertyDetails = () => {
 
   const route: any = useRoute();
   const nav: any = useNavigation()
-
   const dispatch = useDispatch();
 
   const currentProperty = useSelector((state: RootState) => state.property.currentProperty)
@@ -34,7 +33,7 @@ const PropertyDetails = () => {
           <PropertyDetailsScreen
             title={currentProperty.title}
             address={currentProperty.address}
-            badges={[currentProperty.type, ...currentProperty.amenities]}
+            badges={[...currentProperty.amenities]}
             stats={{ seatsAvailable: currentProperty.rooms.length, minStayMonths: currentProperty.minStay, priceFrom: 'LKR 15K' }}
             rooms={currentProperty.rooms}
             onViewRooms={(id) => {

@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, FlatList, ImageBackground, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React, { useEffect, useMemo, useState } from 'react'
 import LinearGradient from 'react-native-linear-gradient';
 import { Star } from 'lucide-react-native';
@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import PropertyItem from './PropertyItem';
 import Skeleton from '../../../../components/ui/Skeleton';
 import PropertyItemSkeleton from './PropertyItemSkeleton';
+import { usePropertyList } from '../../../../hooks/usePropertyList';
 
 // const Properties = [
 //   {
@@ -40,16 +41,9 @@ const PropertyList = () => {
 
   const height = 320;
 
-  const [properties, setProperties] = useState<PItem[]>([])
-
-  useEffect(() => {
-    PropertyAPI.getAllProperties().then((data) => {
-      setProperties(data)
-      console.log(data)
-    }).catch(() => { })
-  }, [])
-
   const styles_ = useMemo(() => styles(height), [height]);
+
+  const { properties, fetchNextBatch, fetching } = usePropertyList();
 
   return (
     <View style={styles_.flexContainer}>
@@ -69,6 +63,18 @@ const PropertyList = () => {
             </>
           )
         }}
+        // ListFooterComponent={(fetching) ? () => <PropertyItemSkeleton /> : null}
+        ListFooterComponent={(fetching) ? () =>
+          <View style={{ padding: 20, alignItems: 'center', justifyContent: 'center' }}>
+            <ActivityIndicator />
+          </View> : null}
+        contentContainerStyle={
+          {
+            paddingBottom: 140
+          }
+        }
+        onEndReached={fetchNextBatch}
+        onEndReachedThreshold={40}
       />
     </View>
   )

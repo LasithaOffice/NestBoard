@@ -1,9 +1,15 @@
-import { Property, PropertyItem } from "../types/properties";
+import { Property, PropertyItem, PropertyListResponse } from "../types/properties";
 import { apiClient } from "./apiClient"
 
 export const PropertyAPI = {
-  getAllProperties: async () => {
-    const d = await apiClient.get<PropertyItem[]>('properties')
+  getAllProperties: async (page: number, limit: number) => {
+
+    const params = new URLSearchParams();
+    params.append("page", page + "");
+    params.append("limit", limit + "");
+    //properties?page=1&limit=4&abc=xyz
+
+    const d = await apiClient.get<PropertyListResponse>('properties?' + params.toString())
     return d.data;
   },
 
