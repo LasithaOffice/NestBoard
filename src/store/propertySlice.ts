@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { Property } from '../types/properties'
+import { Property, RoomType } from '../types/properties'
 
 export interface PropertyState {
-  currentProperty?: Property
+  currentProperty?: Property,
+  roomType?: RoomType[],
 }
 
 const initialState: PropertyState = {
-  currentProperty: undefined
+  currentProperty: undefined,
+  roomType: []
 }
 
 export const propertySlice = createSlice({
@@ -17,10 +19,13 @@ export const propertySlice = createSlice({
     saveProperty: (state, action: PayloadAction<Property>) => {
       state.currentProperty = action.payload;
     },
+    saveRoomTypes: (state, action: PayloadAction<RoomType[]>) => {
+      state.roomType = action.payload;
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { saveProperty } = propertySlice.actions
+export const { saveProperty, saveRoomTypes } = propertySlice.actions
 
 export default propertySlice.reducer

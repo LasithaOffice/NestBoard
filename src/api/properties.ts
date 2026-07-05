@@ -1,4 +1,4 @@
-import { Property, PropertyItem, PropertyListResponse } from "../types/properties";
+import { Property, PropertyItem, PropertyListResponse, RoomType } from "../types/properties";
 import { apiClient } from "./apiClient"
 
 export const PropertyAPI = {
@@ -17,4 +17,15 @@ export const PropertyAPI = {
     const d = await apiClient.get<Property>('properties/' + id)
     return d.data;
   },
+
+  getPropertyRoomTypes: async (id: string) => {
+    const d = await apiClient.get<RoomType[]>('properties/' + id + '/room-types')
+    return d.data;
+  },
+
+  getSingleRoomType: async (proprtyId: string, roomTypeId: string) => {
+    const d = await apiClient.get<RoomType>(`properties/${proprtyId}/room-types/${roomTypeId}`)
+    return d.data;
+  },
+
 }

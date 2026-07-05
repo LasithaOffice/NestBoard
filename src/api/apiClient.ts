@@ -10,7 +10,8 @@ const ANDROID_IP = "10.0.2.2"
 const IOS_IP = "127.0.0.1"
 
 export const apiClient = axios.create({
-  baseURL: `http://${(Platform.OS == 'android') ? ANDROID_IP : IOS_IP}:3001/api/`, //127.0.0.1
+  // baseURL: `http://${(Platform.OS == 'android') ? ANDROID_IP : IOS_IP}:3001/api/`, //127.0.0.1
+  baseURL: 'https://fed-backend-k7mo.onrender.com/api/',
   //"http://172.20.10.5:3001/api/" + "properties"
   headers: {
     'Content-Type': 'application/json',

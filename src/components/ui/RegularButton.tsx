@@ -6,20 +6,23 @@ type Props = {
   Icon: any,
   text: string,
   loading?: boolean,
+  disable?: boolean,
   variant?: 'solid' | 'outline',
   onPress: () => void,
   marginTop?: number
 }
 
-const RegularButton = ({ Icon, text, onPress, loading, marginTop, variant }: Props) => {
+const RegularButton = ({ Icon, text, onPress, loading, marginTop, variant, disable }: Props) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.container, {
-      marginTop,
-      backgroundColor: (variant == 'outline') ? Colors.WHITE : Colors.PRIMARY_COLOR,
-      elevation: (variant == 'outline') ? 0 : 2,
-      borderWidth: (variant == 'outline') ? 1 : 0,
-      borderColor: (variant == 'outline') ? 'black' : 'auto',
-    }]}>
+    <TouchableOpacity
+      disabled={disable}
+      onPress={onPress} style={[styles.container, {
+        marginTop,
+        backgroundColor: (variant == 'outline') ? Colors.WHITE : (disable) ? Colors.ICON_GRAY : Colors.PRIMARY_COLOR,
+        elevation: (variant == 'outline') ? 0 : 2,
+        borderWidth: (variant == 'outline') ? 1 : 0,
+        borderColor: (variant == 'outline') ? 'black' : 'auto',
+      }]}>
       {
         loading ?
           <ActivityIndicator color={Colors.WHITE} />

@@ -37,7 +37,7 @@ export const usePropertyList = () => {
             setPage(p => p + 1)
           }
         }).catch(() => { })
-      }, 4000)
+      }, 0)
     }
   }
 

@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import ScreenWrapper from './components/ScreenWrapper'
 import PropertyDetailsScreen from './components/PropertyDetailsScreen'
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../store/store'
 import Skeleton from '../../../components/ui/Skeleton'
 import { SCREEN_HEIGHT } from '../../../constant/dimentions'
-import { saveProperty } from '../../../store/propertySlice'
+import { saveProperty, saveRoomTypes } from '../../../store/propertySlice'
 
 const PropertyDetails = () => {
 
@@ -17,10 +17,14 @@ const PropertyDetails = () => {
   const dispatch = useDispatch();
 
   const currentProperty = useSelector((state: RootState) => state.property.currentProperty)
+  const roomTypes = useSelector((state: RootState) => state.property.roomType)
 
   useEffect(() => {
     PropertyAPI.getSingleProperty(route.params.pid).then(d => {
-      dispatch(saveProperty(d))
+      dispatch(saveProperty(d)) // Saving property details in redux
+    })
+    PropertyAPI.getPropertyRoomTypes(route.params.pid).then(d => {
+      dispatch(saveRoomTypes(d))// Saving room types in redux
     })
   }, [])
 
@@ -34,10 +38,15 @@ const PropertyDetails = () => {
             title={currentProperty.title}
             address={currentProperty.address}
             badges={[...currentProperty.amenities]}
-            stats={{ seatsAvailable: currentProperty.rooms.length, minStayMonths: currentProperty.minStay, priceFrom: 'LKR 15K' }}
-            rooms={currentProperty.rooms}
-            onViewRooms={(id) => {
-              nav.navigate('RoomListing')
+            stats={{ seatsAvailable: 10, minStayMonths: currentProperty.minStay, priceFrom: 'LKR 15K' }}
+            rooms={roomTypes ?? []}
+            onViewRooms={(id, name) => {
+              nav.navigate('RoomTypeDetails', {
+                roomTypeId: id,
+                roomTypeName: name,
+                location: currentProperty.address
+              })
+              // Alert.alert("idd", id)
             }}
           />
           :

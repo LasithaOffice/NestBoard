@@ -74,7 +74,7 @@ const PropertyList = () => {
           }
         }
         onEndReached={fetchNextBatch}
-        onEndReachedThreshold={40}
+        onEndReachedThreshold={0.5}//0 - 0.5
       />
     </View>
   )

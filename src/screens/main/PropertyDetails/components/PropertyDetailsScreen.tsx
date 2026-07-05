@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import Typography from '../../../../components/ui/Typography';
-import AvailableRoomTypes, { RoomType } from './AvailableRoomTypes';
+import AvailableRoomTypes from './AvailableRoomTypes';
 import { MapPin } from 'lucide-react-native';
 import { Colors } from '../../../../constant/colors';
+import { RoomType } from '../../../../types/properties';
 
 const ACCENT = '#FF6A39';
 const BORDER = '#E5E7EB';
@@ -20,7 +21,7 @@ interface PropertyDetailsScreenProps {
   badges: string[];     // e.g. ['Apartment', 'AC', 'Premium'] — first one is highlighted
   stats: PropertyStats;
   rooms: RoomType[];
-  onViewRooms: (roomId: string) => void;
+  onViewRooms: (roomId: string, roomTypeName: string) => void;
 }
 
 const Chip = ({ label, active }: { label: string; active?: boolean }) => (

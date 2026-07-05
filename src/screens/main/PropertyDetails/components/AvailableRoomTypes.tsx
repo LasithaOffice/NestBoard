@@ -1,27 +1,27 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Typography from '../../../../components/ui/Typography';
+import { RoomType } from '../../../../types/properties';
 
 const ACCENT = '#FF6A39';
 
-export interface RoomType {
-  id: string;
-  name: string;
-  propertyId: string;
-  pricePerMonth: string;
-  seatCapacity: number;
-  hasAC: boolean;
-  createdAt: string;
-}
-
 interface RoomCardProps {
   room: RoomType;
-  onViewRooms: (id: string) => void;
+  onViewRooms: (id: string, roomTypeName: string) => void;
 }
 
-const RoomCard = ({ room, onViewRooms }: RoomCardProps) => {
+const RoomTypeCard = ({ room, onViewRooms }: RoomCardProps) => {
 
-  const fillPercentage = '60';
+  const fillPercentage = useMemo(() => 100 - (room.freeSeats / room.seatCapacity * 100), [
+    room.freeSeats, room.seatCapacity
+  ])
+  // const fillPercentage = ((room.seatCapacity - room.freeSeats) / room.seatCapacity) * 100
+  //100 - 70
+  // 100 -> 30
+
+  // 10, 7
+
+  // 100-(30/100 * 100) = 70
 
   return (
     <View style={styles.card}>
@@ -37,15 +37,15 @@ const RoomCard = ({ room, onViewRooms }: RoomCardProps) => {
       </Typography>
 
       <View style={styles.progressRow}>
-        <Typography variant="caption">{room.seatCapacity} seats free</Typography>
-        <Typography variant="caption">{fillPercentage}% filled</Typography>
+        <Typography variant="caption">{room.freeSeats} seats free</Typography>
+        <Typography variant="caption">{fillPercentage.toFixed(0)}% filled</Typography>
       </View>
 
       <View style={styles.track}>
         <View style={[styles.fill, { width: `${fillPercentage}%` }]} />
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={() => onViewRooms(room.id)}>
+      <TouchableOpacity style={styles.button} onPress={() => onViewRooms(room.id, room.name)}>
         <Typography variant="button">View Rooms  ›</Typography>
       </TouchableOpacity>
     </View>
@@ -54,7 +54,7 @@ const RoomCard = ({ room, onViewRooms }: RoomCardProps) => {
 
 interface AvailableRoomTypesProps {
   rooms: RoomType[];
-  onViewRooms: (id: string) => void;
+  onViewRooms: (id: string, roomTypeName: string) => void;
 }
 
 const AvailableRoomTypes = ({ rooms, onViewRooms }: AvailableRoomTypesProps) => {
@@ -65,7 +65,7 @@ const AvailableRoomTypes = ({ rooms, onViewRooms }: AvailableRoomTypesProps) => 
       </Typography>
 
       {rooms.map((room) => (
-        <RoomCard key={room.id} room={room} onViewRooms={onViewRooms} />
+        <RoomTypeCard key={room.id} room={room} onViewRooms={onViewRooms} />
       ))}
     </View>
   );

@@ -46,9 +46,32 @@ export interface Property {
   amenities: string[];
   latitude: number;
   longitude: number;
-  image: string;
+  imageUrl: string;
   minStay: string;
   isActive: boolean;
   createdAt: string;
-  rooms: Room[];
+}
+
+export interface RoomType {
+  id: string,
+  name: string,
+  pricePerMonth: string,
+  freeSeats: number,
+  maxSeatsCount: number,
+  roomsCount: number,
+  seatCapacity: number,
+  hasAC: boolean,
+  rooms: Room[]
+}
+
+export interface Seat {
+  seatIndex: number,
+  tenant: string,
+  tenantBio: string
+}
+
+export interface Room {
+  roomId: string,
+  roomName: string,
+  booking: Seat[]
 }
