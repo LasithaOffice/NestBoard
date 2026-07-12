@@ -7,6 +7,7 @@ import { RootState } from '../../../store/store'
 import RegularButton from '../../../components/ui/RegularButton'
 import { Lock } from 'lucide-react-native'
 import { BookingAPI } from '../../../api/bookings'
+import { Colors } from '../../../constant/colors'
 
 const ConfirmBooking = () => {
 
@@ -36,14 +37,62 @@ const ConfirmBooking = () => {
     }
   }
 
+  const formatNumberIntoCurrency = (number: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'LKR',
+      maximumFractionDigits: 0,
+    }).format(number);
+  }
+
   return (
-    <View>
+    <View style={{
+      backgroundColor: Colors.WHITE,
+      padding: 16,
+      flex: 1,
+      gap: 16
+    }}>
       <ConfirmScreenHeader />
-      <Typography variant='h3'>{"Property - " + currentProperty?.title}</Typography>
-      <Typography variant='h3'>{"Room - " + roomName}</Typography>
-      <Typography variant='h3'>{"Seat - " + seatIndex}</Typography>
-      <Typography variant='h3'>{"Price - " + (total)}</Typography>
-      <RegularButton Icon={<Lock />} loading={booking} onPress={bookNow} text={'Pay LKR ' + total} />
+      <View style={
+        {
+          padding: 20,
+          elevation: 1,
+          borderRadius: 16,
+          backgroundColor: Colors.WHITE,
+          gap: 24,
+          marginBottom: 8
+        }
+      }>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Typography variant='body' color={Colors.TEXT_GRAY}>{"Property"}</Typography>
+          <Typography variant='h3'>{currentProperty?.title}</Typography>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Typography variant='body' color={Colors.TEXT_GRAY}>{"Room"}</Typography>
+          <Typography variant='h3'>{roomName}</Typography>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Typography variant='body' color={Colors.TEXT_GRAY}>{"Seat"}</Typography>
+          <Typography variant='h3'>{seatIndex}</Typography>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Typography variant='body' color={Colors.TEXT_GRAY}>{"Property"}</Typography>
+          <Typography variant='h3'>{currentProperty?.title}</Typography>
+        </View>
+        <View style={{ height: 0.5, backgroundColor: Colors.BORDER_GRAY }}></View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Typography variant='body' color={Colors.TEXT_GRAY}>{"Price\nBreakdown"}</Typography>
+          <Typography variant='body' color={Colors.TEXT_GRAY}>{
+            formatNumberIntoCurrency(parseFloat(pricePerSeat + "")) + " x " + duration + "\nmonths"
+          }</Typography>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Typography variant='h1'>{"Total"}</Typography>
+          <Typography variant='h1'>{formatNumberIntoCurrency(parseFloat(total))}</Typography>
+        </View>
+      </View>
+      <RegularButton Icon={<Lock color={'white'} />} loading={booking} onPress={bookNow} text={'Pay LKR ' + total} />
+      <Typography variant='caption' style={{ textAlign: 'center' }}>Full payment is required upfront for the entire</Typography>
     </View>
   )
 }
