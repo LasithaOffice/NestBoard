@@ -18,10 +18,13 @@ const RoomCard = ({ room, price }: Props) => {
 
   const extractTwoFirstLetters = (tenant: string) => {
     if (tenant.length > 0) {
-      console.log()
+      console.log("tenant", tenant)
       const twoNames = tenant.split(' ');
-      console.log("dddd ", twoNames[0].charAt(0).toUpperCase() + "" + twoNames[1].charAt(0).toUpperCase())
-      return twoNames[0].charAt(0).toUpperCase() + "" + twoNames[1].charAt(0).toUpperCase()
+      // console.log("dddd ", twoNames[0].charAt(0).toUpperCase() + "" + twoNames[1].charAt(0).toUpperCase())
+      return (twoNames.length > 1) ?
+        twoNames[0].charAt(0).toUpperCase() + "" + twoNames[1].charAt(0).toUpperCase()
+        :
+        twoNames[0].charAt(0).toUpperCase()
     } else {
       return "";
     }
@@ -53,7 +56,7 @@ const RoomCard = ({ room, price }: Props) => {
       padding: 24,
       gap: 16
     }}>
-      <Typography variant='h2'>{room.name}</Typography>
+      <Typography variant='h2'>{room.roomName}</Typography>
       <View style={{
         flexDirection: 'row',
         gap: 12
@@ -93,7 +96,7 @@ const RoomCard = ({ room, price }: Props) => {
         {
           room.booking.map(seat =>
             seat.tenant ?
-              <Typography variant='subtitle' color={Colors.TEXT_GRAY}>{seat.tenant}</Typography>
+              <Typography key={seat.seatIndex} variant='subtitle' color={Colors.TEXT_GRAY}>{seat.tenant}</Typography>
               :
               null
           )

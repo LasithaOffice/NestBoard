@@ -22,7 +22,7 @@ const RoomList = ({ roomType }: Props) => {
       }
     }>
       {
-        roomType.rooms.map(room => <RoomCard key={room.id} room={room} price={roomType.pricePerMonth} />)
+        roomType.rooms.map(room => <RoomCard key={room.roomId} room={room} price={roomType.pricePerMonth} />)
       }
     </ScrollView>
   )

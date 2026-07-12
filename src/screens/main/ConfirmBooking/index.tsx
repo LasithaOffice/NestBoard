@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import ConfirmScreenHeader from './components/Header'
 import Typography from '../../../components/ui/Typography'
 import { useSelector } from 'react-redux'
@@ -8,6 +8,18 @@ import RegularButton from '../../../components/ui/RegularButton'
 import { Lock } from 'lucide-react-native'
 import { BookingAPI } from '../../../api/bookings'
 import { Colors } from '../../../constant/colors'
+import { Picker } from '@react-native-picker/picker';
+
+import dayjs from 'dayjs'
+
+const Months: string[] = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+]
+
+const currentYear = new Date().getFullYear();
+
+const Years: number[] = [currentYear, currentYear + 1, currentYear + 2]
 
 const ConfirmBooking = () => {
 
@@ -19,7 +31,14 @@ const ConfirmBooking = () => {
   const pricePerSeat = useSelector((state: RootState) => state.booking.data?.pricePerSeat);
 
   const [date, setDate] = useState("2026-07")
-  const [duration, setDuration] = useState(4)
+  const [duration, setDuration] = useState(0)
+
+  const [fromDate, setFromDate] = useState(Years[0] + "-" + Months[0]);
+  const [toDate, setToDate] = useState(Years[0] + "-" + Months[0]);
+
+  //2026,2027,2028
+
+
 
   console.log(data)
 
@@ -37,6 +56,24 @@ const ConfirmBooking = () => {
     }
   }
 
+  useEffect(() => {
+    if (fromDate && toDate) {
+      const sd = dayjs(fromDate, 'YYYY-MMM');
+      const td = dayjs(toDate, 'YYYY-MMM');
+      console.log("difference ", td.diff(sd, 'month'))
+      const diff = td.diff(sd, 'month');
+      if (diff < 0) {
+        setToDate(fromDate)
+      } else {
+        setDuration(td.diff(sd, 'month'))
+      }
+    }
+  }, [fromDate, toDate])
+
+  //YYYY-MMM
+
+
+  // Convert a floating number into a currency format
   const formatNumberIntoCurrency = (number: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -67,17 +104,54 @@ const ConfirmBooking = () => {
           <Typography variant='body' color={Colors.TEXT_GRAY}>{"Property"}</Typography>
           <Typography variant='h3'>{currentProperty?.title}</Typography>
         </View>
+
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Typography variant='body' color={Colors.TEXT_GRAY}>{"Room"}</Typography>
           <Typography variant='h3'>{roomName}</Typography>
         </View>
+
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Typography variant='body' color={Colors.TEXT_GRAY}>{"Seat"}</Typography>
           <Typography variant='h3'>{seatIndex}</Typography>
         </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Typography variant='body' color={Colors.TEXT_GRAY}>{"Property"}</Typography>
-          <Typography variant='h3'>{currentProperty?.title}</Typography>
+
+        <View style={{ justifyContent: 'space-between' }}>
+          <Typography variant='body' color={Colors.TEXT_GRAY}>{"Lease Period"}</Typography>
+          <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center', marginTop: 10 }}>
+            {/* From date */}
+            <Picker
+              selectedValue={fromDate}
+              style={{ backgroundColor: '#eee', width: '40%' }}
+              mode='dropdown'
+              onValueChange={(itemValue, itemIndex) =>
+                setFromDate(itemValue)
+              }>
+              {
+                Years.map(year =>
+                  Months.map(month =>
+                    <Picker.Item label={year + "-" + month} value={year + "-" + month} />
+                  )
+                )
+              }
+            </Picker>
+            <Typography variant='h1'> - </Typography>
+            {/* To date */}
+            <Picker
+              selectedValue={toDate}
+              style={{ backgroundColor: '#eee', width: '40%' }}
+              mode='dropdown'
+              onValueChange={(itemValue, itemIndex) =>
+                setToDate(itemValue)
+              }>
+              {
+                Years.map(year =>
+                  Months.map(month =>
+                    <Picker.Item label={year + "-" + month} value={year + "-" + month} />
+                  )
+                )
+              }
+            </Picker>
+          </View>
         </View>
         <View style={{ height: 0.5, backgroundColor: Colors.BORDER_GRAY }}></View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
