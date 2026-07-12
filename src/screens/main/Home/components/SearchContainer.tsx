@@ -5,7 +5,11 @@ import RoundButton from '../../../../components/ui/RoundButton'
 import { Filter, SlidersHorizontal } from 'lucide-react-native'
 import { Colors } from '../../../../constant/colors'
 
-const SearchContainer = () => {
+type Props = {
+  openFilterPanel: () => void;
+}
+
+const SearchContainer = ({ openFilterPanel }: Props) => {
   return (
     <View style={
       {
@@ -17,6 +21,7 @@ const SearchContainer = () => {
         <SearchInput />
       </View>
       <RoundButton
+        onPress={openFilterPanel}
         Icon={<SlidersHorizontal color={Colors.SECONDARY_COLOR} size={20} />}
       />
     </View>

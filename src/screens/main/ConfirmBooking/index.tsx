@@ -11,6 +11,7 @@ import { Colors } from '../../../constant/colors'
 import { Picker } from '@react-native-picker/picker';
 
 import dayjs from 'dayjs'
+import { formatNumberIntoCurrency } from '../../../util/common'
 
 const Months: string[] = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -71,16 +72,6 @@ const ConfirmBooking = () => {
   }, [fromDate, toDate])
 
   //YYYY-MMM
-
-
-  // Convert a floating number into a currency format
-  const formatNumberIntoCurrency = (number: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'LKR',
-      maximumFractionDigits: 0,
-    }).format(number);
-  }
 
   return (
     <View style={{

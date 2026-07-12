@@ -1,15 +1,8 @@
-import { View, Text, FlatList, ImageBackground, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
-import React, { useEffect, useMemo, useState } from 'react'
-import LinearGradient from 'react-native-linear-gradient';
-import { Star } from 'lucide-react-native';
-import { Colors } from '../../../../constant/colors';
-import { PropertyAPI } from '../../../../api/properties';
+import { View, FlatList, StyleSheet, ActivityIndicator } from 'react-native'
+import React, { useMemo } from 'react'
 import { PropertyItem as PItem } from '../../../../types/properties';
-import { useNavigation } from '@react-navigation/native';
-import PropertyItem from './PropertyItem';
-import Skeleton from '../../../../components/ui/Skeleton';
 import PropertyItemSkeleton from './PropertyItemSkeleton';
-import { usePropertyList } from '../../../../hooks/usePropertyList';
+import PropertyItem from './PropertyItem';
 
 // const Properties = [
 //   {
@@ -36,14 +29,19 @@ import { usePropertyList } from '../../../../hooks/usePropertyList';
 //   },
 // ]
 
+type Props = {
+  properties: PItem[],
+  fetchNextBatch: () => void,
+  fetching: boolean
+}
 
-const PropertyList = () => {
+const PropertyList = ({
+  fetchNextBatch, fetching, properties
+}: Props) => {
 
   const height = 320;
 
   const styles_ = useMemo(() => styles(height), [height]);
-
-  const { properties, fetchNextBatch, fetching } = usePropertyList();
 
   return (
     <View style={styles_.flexContainer}>

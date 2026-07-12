@@ -52,6 +52,8 @@ export interface Property {
   createdAt: string;
 }
 
+// export type PropertyTypes = Property["type"];
+
 export interface RoomType {
   id: string,
   name: string,
