@@ -45,7 +45,7 @@ export const PropertyAPI = {
       console.log("list ", (checkedCities.map(obj => obj.city) + ""))
       console.log("extracted citied ", (checkedCities.map(obj => obj.city) + ""))
       if (checkedCities.length > 0) {
-        params.append('minPrice', (checkedCities.map(obj => obj.city) + ""))
+        params.append('city', (checkedCities.map(obj => obj.city) + ""))
       }
     }
     //properties?page=1&limit=4&abc=xyz

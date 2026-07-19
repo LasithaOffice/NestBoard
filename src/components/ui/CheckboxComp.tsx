@@ -13,12 +13,13 @@ type Props = {
   checkedCities: {
     city: string;
     checked: boolean;
-  }[]
+  }[],
+  isSelected?: boolean
 }
 
-const CheckBoxComp = ({ title, setCheckedCities, checkedCities }: Props) => {
+const CheckBoxComp = ({ title, setCheckedCities, checkedCities, isSelected }: Props) => {
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(isSelected);
 
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>

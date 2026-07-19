@@ -3,6 +3,9 @@ import React, { useMemo } from 'react'
 import { PropertyItem as PItem } from '../../../../types/properties';
 import PropertyItemSkeleton from './PropertyItemSkeleton';
 import PropertyItem from './PropertyItem';
+import Typography from '../../../../components/ui/Typography';
+import { FileQuestionMark } from 'lucide-react-native';
+import { Colors } from '../../../../constant/colors';
 
 // const Properties = [
 //   {
@@ -54,11 +57,24 @@ const PropertyList = ({
         renderItem={(dt) => <PropertyItem dt={dt} />}
         ListEmptyComponent={() => {
           return (
-            <>
-              <PropertyItemSkeleton />
-              <View style={{ height: 16 }}></View>
-              <PropertyItemSkeleton />
-            </>
+            (fetching) ?
+              <>
+                <PropertyItemSkeleton />
+                <View style={{ height: 16 }}></View>
+                <PropertyItemSkeleton />
+              </>
+              :
+              <View style={
+                {
+                  width: '100%',
+                  aspectRatio: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }
+              }>
+                <FileQuestionMark color={Colors.ICON_GRAY} size={100} />
+                <Typography>No properties found</Typography>
+              </View>
           )
         }}
         // ListFooterComponent={(fetching) ? () => <PropertyItemSkeleton /> : null}

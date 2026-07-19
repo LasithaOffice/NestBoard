@@ -31,7 +31,7 @@ const Home = () => {
 
   const trigger = () => {
     setTriggerFilter(new Date().getTime())
-    // bottomSheetModalRef.current?.dismiss();
+    bottomSheetModalRef.current?.dismiss();
   }
 
   const { properties, fetchNextBatch, fetching } = usePropertyList(currentPType, range, checkedCities, triggerFilter);

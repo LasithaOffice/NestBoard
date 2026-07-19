@@ -60,6 +60,15 @@ const FilterPanel = forwardRef<BottomSheetModal, Props>(
     // }
     // ]
 
+    //     [
+    //   "Colombo",
+    //   "Ethul Kotte",
+    //   "Gampaha",
+    //   "Kadawatha",
+    //   "Kiribathgoda",
+    //   "Galle"
+    // ]
+
     return (
       <BottomSheetModal
         ref={ref}
@@ -74,7 +83,7 @@ const FilterPanel = forwardRef<BottomSheetModal, Props>(
             <Typography variant='h2'>Cities</Typography>
             {
               CITIES.map(city =>
-                <CheckBoxComp key={city} title={city} checkedCities={checkedCities} setCheckedCities={setCheckedCities} />
+                <CheckBoxComp key={city} isSelected={checkedCities.find(obj => obj.city == city)?.checked} title={city} checkedCities={checkedCities} setCheckedCities={setCheckedCities} />
               )
             }
           </View>
