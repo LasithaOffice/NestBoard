@@ -50,7 +50,11 @@ const TabScreens = () => {
       />
       <Tab.Screen name='Search' component={Search} />
       <Tab.Screen name='Favorite' component={Favorite} />
-      <Tab.Screen name='PropertyMap' component={PropertyMap} />
+      <Tab.Screen name='PropertyMap' component={PropertyMap} options={
+        {
+          headerShown: false
+        }
+      } />
       <Tab.Screen name='Profile' component={Profile} />
     </Tab.Navigator>
   )

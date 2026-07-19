@@ -1,5 +1,5 @@
 import { PropertyType } from "../types/common";
-import { Property, PropertyItem, PropertyListResponse, RoomType } from "../types/properties";
+import { Property, PropertyItem, PropertyListResponse, PropertyLocation, RoomType } from "../types/properties";
 import { apiClient } from "./apiClient"
 
 export const PropertyAPI = {
@@ -66,6 +66,11 @@ export const PropertyAPI = {
 
   getSingleRoomType: async (proprtyId: string, roomTypeId: string) => {
     const d = await apiClient.get<RoomType>(`properties/${proprtyId}/room-types/${roomTypeId}`)
+    return d.data;
+  },
+
+  getMapList: async () => {
+    const d = await apiClient.get<PropertyLocation[]>(`properties/map-list`)
     return d.data;
   },
 

@@ -77,3 +77,14 @@ export interface Room {
   roomName: string,
   booking: Seat[]
 }
+
+export interface PropertyLocation {
+  id: string;
+  name: string;
+  address: string;
+  cost: string;
+  image: string;
+  lat: number;
+  lng: number;
+  ratings: number;
+}
