@@ -7,8 +7,30 @@ import { checkStatus } from '../util/localStorage'
 import MainStack from './MainStack'
 import { useDispatch } from 'react-redux'
 import { initAuth } from '../store/authSlice'
+import { LinkingOptions, NavigationContainer } from '@react-navigation/native'
 
 const Stack = createNativeStackNavigator()
+
+//nestboard://property/897a4dd4-6268-4fdb-950d-98a11b2f2e6b
+//nestboard://profile/user/123
+const linking: LinkingOptions<any> = {
+  prefixes: ['nestboard://'],
+  config: {
+    screens: {
+      MainStack: {
+        screens: {
+          AppStack: {
+            screens: {
+              PropertyDetails: 'property/:pid',
+              Profile: 'profile/user/:id'
+            },
+          },
+        },
+      },
+    },
+  },
+}
+
 
 const RootStack = () => {
 
@@ -30,21 +52,21 @@ const RootStack = () => {
     }, 500)
   }, [])
 
-  return (
-    <Stack.Navigator screenOptions={
-      {
-        headerShown: false
-      }
-    }
-    >
-      {
-        loading ?
-          <Stack.Screen name='splash' component={SplashScreen} />
-          :
-          <Stack.Screen name='MainStack' component={MainStack} />
-      }
+  if (loading) {
+    return <SplashScreen />
+  }
 
-    </Stack.Navigator>
+  return (
+    <NavigationContainer linking={linking}>
+      <Stack.Navigator screenOptions={
+        {
+          headerShown: false
+        }
+      }
+      >
+        <Stack.Screen name='MainStack' component={MainStack} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 

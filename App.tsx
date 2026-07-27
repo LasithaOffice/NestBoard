@@ -22,23 +22,13 @@ import {
 dayjs.extend(customParseFormat);
 function App() {
 
-  const sameera = {
-    stream: 'maths',
-    name: "Sameera"
-  };
-
-
   return (
     <Provider store={store}>
       <GestureHandlerRootView style={styles.container}>
         <BottomSheetModalProvider>
           <SafeAreaProvider>
             <View style={{ flex: 1 }}>
-              <NavigationContainer>
-                {/* <MainStack />   */}
-                {/* <-- Navigation system */}
-                <RootStack />
-              </NavigationContainer>
+              <RootStack />
             </View>
           </SafeAreaProvider>
         </BottomSheetModalProvider>

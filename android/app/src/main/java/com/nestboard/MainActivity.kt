@@ -1,5 +1,7 @@
 package com.nestboard
 
+//com.nestboard.app
+
 import android.os.Bundle
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

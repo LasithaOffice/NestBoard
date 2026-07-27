@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native'
 import React from 'react'
-import { Bell } from 'lucide-react-native'
+import { Bell, QrCode } from 'lucide-react-native'
 import { Colors } from '../../../../constant/colors'
 import RoundButton from '../../../../components/ui/RoundButton'
 import { useNavigation } from '@react-navigation/native'
@@ -30,14 +30,22 @@ const Header = () => {
           }
         }>Board</Text>
       </Text>
-      <RoundButton
-        Icon={<Bell color={Colors.SECONDARY_COLOR} size={20} />}
-        orangeIndicator
-        onPress={() => {
-          dispatch(logout())
-          removeRefreshToken();
-        }}
-      />
+      <View style={{ flexDirection: 'row', gap: 10 }}>
+        <RoundButton
+          Icon={<QrCode color={Colors.SECONDARY_COLOR} size={20} />}
+          onPress={() => {
+            nav.navigate('QrScan')
+          }}
+        />
+        <RoundButton
+          Icon={<Bell color={Colors.SECONDARY_COLOR} size={20} />}
+          orangeIndicator
+          onPress={() => {
+            dispatch(logout())
+            removeRefreshToken();
+          }}
+        />
+      </View>
     </View>
   )
 }

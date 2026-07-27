@@ -6,6 +6,7 @@ import Header from '../screens/main/Home/components/Header'
 import TabScreens from './TabNavigation/TabScreens'
 import RoomTypeDetails from '../screens/main/RoomList'
 import ConfirmBooking from '../screens/main/ConfirmBooking'
+import QrScan from '../screens/main/QrScan'
 
 const Stack = createNativeStackNavigator()
 
@@ -24,6 +25,10 @@ const AppStack = () => {
         headerTransparent: true
       }} />
       <Stack.Screen name='ConfirmBooking' component={ConfirmBooking} options={{
+        headerShown: false,
+        headerTransparent: true
+      }} />
+      <Stack.Screen name='QrScan' component={QrScan} options={{
         headerShown: false,
         headerTransparent: true
       }} />

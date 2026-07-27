@@ -8,6 +8,13 @@ export const AuthAPI = {
     return d.data;
   },
 
+  socialAuth: async (idToken: string) => {
+    const d = await apiClient.post<AuthResponse>('auth/google', {
+      idToken
+    });
+    return d.data;
+  },
+
   register: async (payload: RegisterPayload) => {
     //     {
     //   email: "abc@gmail.com";

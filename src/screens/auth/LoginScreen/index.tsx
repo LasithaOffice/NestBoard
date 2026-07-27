@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { saveToken } from "../../../store/authSlice";
 import { persistLogin } from "../../../util/localStorage";
 import { useNavigation } from "@react-navigation/native";
+import useSocialAuth from "../../../hooks/useSocialAuth";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -64,6 +65,18 @@ export default function LoginScreen() {
       setLoading(false);
     }
   };
+
+  //Development , Staging, QA, Production
+  //Debug , Release
+
+  //nestboard://
+  //nestboard://property/897a4dd4-6268-4fdb-950d-98a11b2f2e6b
+
+  const { authGoogle, loading: googleAuthenticating } = useSocialAuth();
+
+  const joinWithGoogle = () => {
+    authGoogle();
+  }
 
   return (
     <AuthUIWrapper heightPrecentage={'45%'}>
@@ -113,8 +126,8 @@ export default function LoginScreen() {
           Icon={undefined}
           variant="outline"
           text={"Join with Google"}
-          onPress={handleContinue}
-          loading={loading}
+          onPress={joinWithGoogle}
+          loading={googleAuthenticating}
         />
 
         <TouchableOpacity onPress={() => nav.navigate('Signup')}>
